@@ -61,7 +61,7 @@ Dari data tersebut diketahui terdapat 2 baris data yang null pada kolom `sqft_ab
 
 Dan juga, dari data tersebut tidak ditemukan data yang duplikat
 
-![Null Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/duplicate-data.png)
+![Duplicate Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/duplicate-data.png)
 
 **Rubrik/Kriteria Tambahan (Opsional)**:
 
@@ -76,7 +76,15 @@ Data dibersihkan dengan menghapus kolom yang tidak diperlukan, dan juga baris ya
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 
-Tahapan dimulai dengan menghapus baris yang memiliki nilai null. Dan juga menghapus data yang duplikat. Setelah itu kolom yang tidak diperlukan seperti `id` dan `date` dihapus agar tidak merusak hasil train data.
+Tahapan dimulai dengan menghapus baris yang memiliki nilai null. 
+
+![Remove Null Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/remove-null-data.png)
+
+Dan juga menghapus data yang duplikat. 
+
+![Duplicate Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/duplicate-data.png)
+
+Setelah itu kolom yang tidak diperlukan seperti `id` dan `date` dihapus agar tidak merusak hasil train data.
 
 Setelah mengetahui fakta bahwa "Kebanyakan rumah yang berada di tengah-tengah kota, memiliki harga yang relatif mahal". Selanjutnya kolom `lat` dan `long` dikonversikan menjadi kolom `distance_to_center`, menggunakan rumus Haversine:
 ```
