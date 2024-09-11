@@ -80,13 +80,9 @@ Tahapan dimulai dengan menghapus baris yang memiliki nilai null.
 
 ![Remove Null Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/remove-null-data.png)
 
-Dan juga menghapus data yang duplikat. 
-
-![Duplicate Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/duplicate-data.png)
-
 Setelah itu kolom yang tidak diperlukan seperti `id` dan `date` dihapus agar tidak merusak hasil train data.
 
-![Duplicate Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/drop-column.png)
+![Drop Column](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/drop-column.png)
 
 Setelah mengetahui fakta bahwa "Kebanyakan rumah yang berada di tengah-tengah kota, memiliki harga yang relatif mahal". Selanjutnya kolom `lat` dan `long` dikonversikan menjadi kolom `distance_to_center`, menggunakan rumus Haversine:
 ```
@@ -104,21 +100,55 @@ Perhitungan dilakukan dengan bantuan library `geodesic` dari python.
 
 Setelah itu, data dipisah menjadi data `train` dan `test` dengan menggunakan fungsi `train_test_split` dari library `sklearn`. Pemisahan dilakukan dengan perbandingan `80% data train` dan `20% data test`.
 
+Setelah data berhasil dipisah. Kemudian data `X_train` dan `X_test` ditransformasikan menggunakan **StandarScaler**.
+
 ## Modeling
-Data dilatih dengan menggunakan model Deep Learning Sequential, dengan metrik evaluasinya adalah Mean Squared Error (MSE). Tahapan modeling dimulai dari perancangan model machine learning, yang terdiri dari layer sebagai berikut:
+Data dilatih dengan menggunakan model Deep Learning Sequential. Yaitu, sebuah model dari Keras yang menghubungkan lapisan-lapisan (layers) secara berurutan. Ini berarti bahwa output dari satu layer menjadi input untuk layer berikutnya. Model ini sangat cocok untuk arsitektur model yang linear, di mana lapisan-lapisan saling terhubung secara berurutan.
+
+Selain menggunakan model Deep Learning Sequential. model ini juga menggunakan metrik evaluasi Mean Squared Error (MSE). Yaitu sebuah metrik yang mengukur rata-rata dari kuadrat perbedaan antara nilai yang diprediksi oleh model dan nilai aktual (ground truth). Metrik ini memberikan informasi tentang seberapa jauh prediksi model dari nilai yang sebenarnya.
+
+Tahapan modeling dimulai dari perancangan model machine learning, yang terdiri dari layer sebagai berikut:
+
 - Sequential
-  - Dense (128 neuron, activation dengan relu, dan input_shape adalah fitur/kolom dari dataset)
-  - Dropout (rate 0.2)
-  - Dense (64 neuron, activation dengan relu)
-  - Dropout (rate 0.2)
-  - Dense (32 neuron, activation dengan relu)
-  - Dropout (rate 0.2)
-  - Dense (16 neuron, activation dengan relu)
-  - Dense (1 neuron)
+  - Input Layer
+    - Dense 1
+  - Hidden Layer 
+    - Dropout 1
+    - Dense 2
+    - Dropout 2
+    - Dense 3
+    - Dropout 3
+    - Dense 4
+  - Output Layer
+    - Dense 5
 
-Kemudian, data model di-compile dengan menggunakan *loss function* `mean_squared_error` dan *optimizer* `adam`.
+Model dibangun dengan hyperparameter sebagai berikut:
 
-Dan setelah itu data dilatih dengan jumlah epoch 375.
+- Jumlah Neuron per Layer:
+  - Dense Layer 1: 128 neuron
+  - Dense Layer 2: 64 neuron
+  - Dense Layer 3: 32 neuron
+  - Dense Layer 4: 16 neuron
+  - Dense Layer 5: 1 neuron
+
+- Activation Function:
+  - ReLU (Rectified Linear Unit): Digunakan pada layer-layer Dense, kecuali layer output.
+
+- Dropout Rate:
+  - Dropout Layer 1: 0.2 (20%)
+  - Dropout Layer 2: 0.2 (20%)
+  - Dropout Layer 3: 0.2 (20%)
+  - Dropout digunakan untuk mengurangi overfitting dengan secara acak mematikan neuron selama pelatihan.
+
+- Optimizer: Adam (yaitu, algoritma optimisasi yang digunakan untuk memperbarui bobot model selama pelatihan. Adam mengadaptasi learning rate berdasarkan estimasi momen pertama dan kedua dari gradien).
+
+- Loss Function: Mean Squared Error (MSE) yang digunakan untuk menghitung seberapa jauh prediksi model dari nilai aktual.
+
+- Epochs: Jumlah Epoch: 375 epoch (Epoch mengacu pada jumlah iterasi model melalui seluruh dataset selama pelatihan).
+
+Setelah model terbuat, model tersebut kemudian dicompile dengan menggunakan *loss function* `mean_squared_error` dan *optimizer* `adam`.
+
+Dan setelah itu data dilatih dengan jumlah epoch sebanyak 375.
 
 ## Evaluation
 Dengan penggunaan metrik Mean Squared Error (MSE) pada model machine learning ini. Didapatkan hasil pelatihan sebagai berikut (yang ditampilkan dalam bentuk *line plot*):
@@ -129,7 +159,17 @@ Pelatihan dimulai dengan nilai dari `loss` dan `val_loss` adalah: loss: 23867654
 
 Dan diakhiri dengan nilai dari `loss` dan `val_loss` adalah: loss: 22257076224.0000 - val_loss: 21322461184.0000
 
-Selanjutnya model diuji dengan memasukan sampel data yaitu data baris pertama pada dataset. Dan didapatkan hasil sebagai berikut:
+Hasil ini menunjukkan bahwa selama pelatihan, model mengalami penurunan dalam nilai `loss`, yang menunjukkan bahwa model belajar untuk memprediksi dengan lebih baik. Namun, ada sedikit peningkatan pada `val_loss` pada akhir pelatihan, yang mungkin mengindikasikan sedikit overfitting.
+
+Selanjutnya, model diuji dengan memasukan sampel data yaitu data baris pertama pada dataset. Dan didapatkan hasil sebagai berikut:
 ![Predict Result](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/first-row-prediction.png)
+
+Hasil ini menunjukkan bahwa di antara nilai prediksi dan nilai aktual, terdapat *gap* atau jarak yang diukur dalam nilai MSE.
+
+#### Kesimpulan
+Dari proyek machine learning ini didapati hasil akhir bahwa:
+- Berdasarkan analisis data dan model machine learning, faktor yang paling berpengaruh dalam kenaikan harga rumah di Seattle adalah **dekatnya jarak dari rumah menuju ke pusat kota**.
+- Meskipun sulit untuk menemukan prediksi harga rumah yang tepat, hasil dari model machine learning ini dapat memberikan estimasi harga yang lebih akurat dibandingkan metode tradisional. Metrik MSE digunakan untuk mengevaluasi kinerja model dan memberikan wawasan tentang akurasi prediksi model.
+- Solusi ini berdampak signifikan karena memungkinkan pengambilan keputusan yang lebih baik dalam hal harga jual atau beli rumah, perencanaan investasi, dan strategi pasar. Dengan estimasi harga yang lebih akurat dari model machine learning, pengguna dapat membuat keputusan yang lebih terinformasi dan strategis.
 
 **---Ini adalah bagian akhir laporan---**
