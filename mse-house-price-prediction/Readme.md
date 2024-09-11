@@ -9,8 +9,6 @@ Proyek ini bertujuan untuk memprediksi harga rumah di Seattle menggunakan algori
 Hasil awal menunjukkan bahwa salah satu faktor utama yang mempengaruhi harga rumah adalah jaraknya dari pusat kota, di mana rumah yang lebih dekat cenderung lebih mahal. Dengan model prediksi ini, diharapkan dapat memberikan wawasan yang lebih baik bagi para pelaku pasar properti di Seattle.
 
 ## Business Understanding
-
-Pada bagian ini, kamu perlu menjelaskan proses klarifikasi masalah.
 Dalam memprediksi harga rumah di Seattle, beberapa tantangan utama perlu diidentifikasi dan dijelaskan untuk memperjelas masalah yang dihadapi.
 
 ### Problem Statements
@@ -56,6 +54,14 @@ Proyek ini menggunakan data historis rumah yang terjual antara mei 2014 hingga m
 - long: Merupakan longitude dari koordinat rumah.
 - sqft_living15: Merupakan luas area hunian dalam kaki persegi pada 15 rumah terdekat.
 - sqft_lot15: Merupakan luas lot (tanah) dalam kaki persegi pada 15 rumah terdekat.
+
+Dari data tersebut diketahui terdapat 2 baris data yang null pada kolom `sqft_above`
+
+![Null Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/preview-null-data.png)
+
+Dan juga, dari data tersebut tidak ditemukan data yang duplikat
+
+![Null Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/duplicate-data.png)
 
 **Rubrik/Kriteria Tambahan (Opsional)**:
 
