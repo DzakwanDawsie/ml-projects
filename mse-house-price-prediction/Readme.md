@@ -55,8 +55,13 @@ Proyek ini menggunakan data historis rumah yang terjual antara mei 2014 hingga m
 - sqft_living15: Merupakan luas area hunian dalam kaki persegi pada 15 rumah terdekat.
 - sqft_lot15: Merupakan luas lot (tanah) dalam kaki persegi pada 15 rumah terdekat.
 
-Dari data tersebut diketahui terdapat 2 baris data yang null pada kolom ``
+Dari data tersebut diketahui terdapat 2 baris data yang null pada kolom `sqft_above`
+
 ![Null Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/preview-null-data.png)
+
+Dan juga, dari data tersebut tidak ditemukan data yang duplikat
+
+![Null Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/duplicate-data.png)
 
 **Rubrik/Kriteria Tambahan (Opsional)**:
 
