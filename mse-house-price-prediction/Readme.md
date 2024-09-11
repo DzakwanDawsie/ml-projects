@@ -13,13 +13,11 @@ Hasil awal menunjukkan bahwa salah satu faktor utama yang mempengaruhi harga rum
 Pada bagian ini, kamu perlu menjelaskan proses klarifikasi masalah.
 Dalam memprediksi harga rumah di Seattle, beberapa tantangan utama perlu diidentifikasi dan dijelaskan untuk memperjelas masalah yang dihadapi.
 
-Bagian laporan ini mencakup:
-
 ### Problem Statements
 
 Menjelaskan pernyataan masalah latar belakang:
-- Harga rumah yang bervariasi di Seattle tergantung pada banyak faktor, namun sulit memahami faktor yang paling berpengaruh
-- Sulitnya menemukan prediksi harga yang tepat untuk rumah yang berada di Seattle
+- Harga rumah yang bervariasi di Seattle tergantung pada banyak faktor, namun sulit memahami faktor yang paling berpengaruh.
+- Sulitnya menemukan prediksi harga yang tepat untuk rumah yang berada di Seattle.
 
 ### Goals
 
@@ -27,6 +25,8 @@ Menjelaskan tujuan dari pernyataan masalah:
 - Mengidentifikasi faktor kunci yang memengaruhi harga rumah berdasarkan data historis.
 - Mengukur pengaruh jarak ke pusat kota secara kuantitatif dengan analisis machine learning untuk mengetahui dampaknya pada harga.
 
+
+**Rubrik/Kriteria Tambahan (Opsional)**:
 ### Solution statements
 - Membuat visualisasi penyebaran rumah menggunakan Scatter Plot untuk mengidentifikasi faktor jarak rumah ke pusat kota Seattle.
 - Menggunakan model Deep Learning Sequential dengan metrik evaluasi Mean Squared Error (MSE) untuk prediksi harga rumah.
@@ -57,39 +57,63 @@ Proyek ini menggunakan data historis rumah yang terjual antara mei 2014 hingga m
 - sqft_living15: Merupakan luas area hunian dalam kaki persegi pada 15 rumah terdekat.
 - sqft_lot15: Merupakan luas lot (tanah) dalam kaki persegi pada 15 rumah terdekat.
 
-Selanjutnya data divisualisasikan dalam bentuk scatter plot, dengan x adalah `longitude` dan y adalah `latitude`. Dan dikelompokan berdasarkan `price`. Setelah itu dibandingkan secara *side by side* dengan peta map asli Seattle
 **Rubrik/Kriteria Tambahan (Opsional)**:
-- Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data atau exploratory data analysis.
+
+Selanjutnya data divisualisasikan dalam bentuk scatter plot, dengan x adalah `longitude` dan y adalah `latitude`. Dan dikelompokan berdasarkan `price`. Setelah itu dibandingkan secara *side by side* dengan peta map asli Seattle.
+![Scatter Plot And Real Map Seattle](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/seattle-scatter-map.png)
+Dari perbandingan antara Scatter Plot dan Map Asli Seattle ini, diketahui bahwa:
+
+**Kebanyakan rumah yang berada di tengah-tengah kota, memiliki harga yang relatif mahal**
 
 ## Data Preparation
-Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
+Data dibersihkan dengan menghapus kolom yang tidak diperlukan, dan juga baris yang memiliki nilai null. Dan juga pengkonversian beberapa kolom menjadi sebuah kolom baru.
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan proses data preparation yang dilakukan
-- Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
+
+Tahapan dimulai dengan menghapus baris yang memiliki nilai null. Dan juga menghapus data yang duplikat. Setelah itu kolom yang tidak diperlukan seperti `id` dan `date` dihapus agar tidak merusak hasil train data.
+
+Setelah mengetahui fakta bahwa "Kebanyakan rumah yang berada di tengah-tengah kota, memiliki harga yang relatif mahal". Selanjutnya kolom `lat` dan `long` dikonversikan menjadi kolom `distance_to_center`, menggunakan rumus Haversine:
+```
+a = sin²(Δφ/2) + cos φ1 ⋅ cos φ2 ⋅ sin²(Δλ/2)
+c = 2 ⋅ atan2( √a, √(1−a) )
+d = R ⋅ c
+```
+Yang dimana:
+- φ adalah latitude, λ adalah longitude
+- Δφ = φ2 − φ1
+- Δλ = λ2 − λ1
+- R adalah radius bumi (rata-rata 6.371 km)
+
+Perhitungan dilakukan dengan bantuan library `geodesic` dari python.
+
+Setelah itu, data dipisah menjadi data `train` dan `test` dengan menggunakan fungsi `train_test_split` dari library `sklearn`. Pemisahan dilakukan dengan perbandingan `80% data train` dan `20% data test`.
 
 ## Modeling
-Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
+Data dilatih dengan menggunakan model Deep Learning Sequential, dengan metrik evaluasinya adalah Mean Squared Error (MSE). Tahapan modeling dimulai dari perancangan model machine learning, yang terdiri dari layer sebagai berikut:
+- Sequential
+  - Dense (128 neuron, activation dengan relu, dan input_shape adalah fitur/kolom dari dataset)
+  - Dropout (rate 0.2)
+  - Dense (64 neuron, activation dengan relu)
+  - Dropout (rate 0.2)
+  - Dense (32 neuron, activation dengan relu)
+  - Dropout (rate 0.2)
+  - Dense (16 neuron, activation dengan relu)
+  - Dense (1 neuron)
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
-- Jika menggunakan satu algoritma pada solution statement, lakukan proses improvement terhadap model dengan hyperparameter tuning. **Jelaskan proses improvement yang dilakukan**.
-- Jika menggunakan dua atau lebih algoritma pada solution statement, maka pilih model terbaik sebagai solusi. **Jelaskan mengapa memilih model tersebut sebagai model terbaik**.
+Kemudian, data model di-compile dengan menggunakan *loss function* `mean_squared_error` dan *optimizer* `adam`.
+
+Dan setelah itu data dilatih dengan jumlah epoch 375.
 
 ## Evaluation
-Pada bagian ini anda perlu menyebutkan metrik evaluasi yang digunakan. Lalu anda perlu menjelaskan hasil proyek berdasarkan metrik evaluasi yang digunakan.
+Dengan penggunaan metrik Mean Squared Error (MSE) pada model machine learning ini. Didapatkan hasil pelatihan sebagai berikut (yang ditampilkan dalam bentuk *line plot*):
 
-Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
-- Penjelasan mengenai metrik yang digunakan
-- Menjelaskan hasil proyek berdasarkan metrik evaluasi
+![Training Result](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/train-result.png)
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+Pelatihan dimulai dengan nilai dari `loss` dan `val_loss` adalah: loss: 23867654144.0000 - val_loss: 21040510976.0000
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+Dan diakhiri dengan nilai dari `loss` dan `val_loss` adalah: loss: 22257076224.0000 - val_loss: 21322461184.0000
+
+Selanjutnya model diuji dengan memasukan sampel data yaitu data baris pertama pada dataset. Dan didapatkan hasil sebagai berikut:
+![Predict Result](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/first-row-prediction.png)
 
 **---Ini adalah bagian akhir laporan---**
-
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
