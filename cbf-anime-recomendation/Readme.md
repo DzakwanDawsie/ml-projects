@@ -76,7 +76,9 @@ Data preparation dimulai dari melakukan cleansing data, hingga melakukan Feature
 ## Modeling
 Model ini dibangun dengan menggunakan algoritma Cosine Similarity. Yaitu, sebuah algoritma yang mengukur kesamaan antara dua vektor dan menentukan apakah kedua vektor tersebut menunjuk ke arah yang sama. Ia menghitung sudut cosinus antara dua vektor. Semakin kecil sudut cosinus, semakin besar nilai cosine similarity. 
 
-Selain menggunakan model Deep Learning Sequential. model ini juga menggunakan metrik evaluasi Mean Squared Error (MSE). Yaitu sebuah metrik yang mengukur rata-rata dari kuadrat perbedaan antara nilai yang diprediksi oleh model dan nilai aktual (ground truth). Metrik ini memberikan informasi tentang seberapa jauh prediksi model dari nilai yang sebenarnya.
+![Cosine Similarity](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/cosine-sim-df.png)
+
+Dengan cosine similarity, diketahui kesamaan antara satu anime dengan anime lainnya. Shape (18336, 18336) merupakan ukuran matriks similarity dari data yang kita miliki. Berdasarkan data yang ada, matriks di atas sebenarnya berukuran 18336 restoran x 18336 anime (masing-masing dalam sumbu X dan Y). Artinya, telah di-identifikasi tingkat kesamaan pada 18336 judul anime. Tapi tentu hal ini tidak bisa ditampilkan semuanya. Oleh karena itu, dipilih 10 anime pada baris vertikal dan 5 anime pada sumbu horizontal seperti pada contoh di atas. 
 
 Tahapan modeling dimulai dari perancangan model machine learning, yang terdiri dari layer sebagai berikut:
 
