@@ -51,38 +51,30 @@ Proyek ini menggunakan data katalog anime yang terdaftar antara tahun 1917 hingg
 ![Pie Chart Not Available Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/pie-chart-na-data.png)
 
 ## Data Preparation
-Data dibersihkan dengan menghapus kolom yang tidak diperlukan, dan juga baris yang memiliki nilai null. Dan juga pengkonversian beberapa kolom menjadi sebuah kolom baru.
+Data preparation dimulai dari melakukan cleansing data, hingga melakukan Feature Encoding, dengan tahapan sebagai berikut:
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
+1. Hapus baris `synopsis` yang bernilai null
 
-Tahapan dimulai dengan menghapus baris yang memiliki nilai null. 
+   Karena `synopsis` diperlukan untuk proses feature encoding, maka untuk data dengan `synopsis` bernilai nullharus dihapus.
+3. Hapus kolom `episodes`
 
-![Remove Null Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/remove-null-data.png)
+   Karena kolom `episodes` tidak diperlukan dalam proses modeling, maka kolom tersebut perlu dihapus, agar hasil filtering menjadi maksimal
+5. Replace kolom `ranked` yang bernilai null dengan nilai maksimum dari `ranked`
 
-Setelah itu kolom yang tidak diperlukan seperti `id` dan `date` dihapus agar tidak merusak hasil train data.
+   Kolom `ranked` perlu direplace dengan nilai maksimum dari `ranked` yaitu 18336. Dengan anggapan, anime tanpa ranking akan memasuki urutan terbawah.
+7. Replace kolom `score` yang bernilai null dengan nilai rata-rata dari `score`
 
-![Drop Column](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/drop-column.png)
-
-Setelah mengetahui fakta bahwa "Kebanyakan rumah yang berada di tengah-tengah kota, memiliki harga yang relatif mahal". Selanjutnya kolom `lat` dan `long` dikonversikan menjadi kolom `distance_to_center`, menggunakan rumus Haversine:
-```
-a = sin²(Δφ/2) + cos φ1 ⋅ cos φ2 ⋅ sin²(Δλ/2)
-c = 2 ⋅ atan2( √a, √(1−a) )
-d = R ⋅ c
-```
-Yang dimana:
-- φ adalah latitude, λ adalah longitude
-- Δφ = φ2 − φ1
-- Δλ = λ2 − λ1
-- R adalah radius bumi (rata-rata 6.371 km)
-
-Perhitungan dilakukan dengan bantuan library `geodesic` dari python.
-
-Setelah itu, data dipisah menjadi data `train` dan `test` dengan menggunakan fungsi `train_test_split` dari library `sklearn`. Pemisahan dilakukan dengan perbandingan `80% data train` dan `20% data test`.
-
-Setelah data berhasil dipisah. Kemudian data `X_train` dan `X_test` ditransformasikan menggunakan **StandarScaler**.
+   Karena kolom `score` diperlukan untuk proses modeling, maka perlu direplace dengan nilai rata-rata, supaya tidak merusak hasil rekomendasi.
+9. Menghapus kolom `img_url` dan `link` dan `aired` karena tidak diperlukan.
+10. Mentransformasikan nilai pada kolom `genre` menjadi kolom tersendiri.
+11. Hapus kolom `genre` setelah transformasi.
+12. Melakukan beberapa teknik preprocessing text terhadap kolom `synopsis` dan membuatkannya kolom baru, yaitu `synopsis_clean`. Seperti teknik cleaning text, casefolding text, tokenizing text, dan juga filtering text. Kemudian merubahnya kembali ke bentuk kalimat.
+13. Hapus kolom `synopsis` setelah preprocessing text.
+14. Melakukan feature encoding menggunakan TF-ID.
+15. Menggabungkan `feature` hasil encoding dengan DataFrame `anime_df` tanpa kolom `title` dan `synopsis_clean`.
 
 ## Modeling
-Data dilatih dengan menggunakan model Deep Learning Sequential. Yaitu, sebuah model dari Keras yang menghubungkan lapisan-lapisan (layers) secara berurutan. Ini berarti bahwa output dari satu layer menjadi input untuk layer berikutnya. Model ini sangat cocok untuk arsitektur model yang linear, di mana lapisan-lapisan saling terhubung secara berurutan.
+Model ini dibangun dengan menggunakan algoritma Cosine Similarity. Yaitu, sebuah algoritma yang mengukur kesamaan antara dua vektor dan menentukan apakah kedua vektor tersebut menunjuk ke arah yang sama. Ia menghitung sudut cosinus antara dua vektor. Semakin kecil sudut cosinus, semakin besar nilai cosine similarity. 
 
 Selain menggunakan model Deep Learning Sequential. model ini juga menggunakan metrik evaluasi Mean Squared Error (MSE). Yaitu sebuah metrik yang mengukur rata-rata dari kuadrat perbedaan antara nilai yang diprediksi oleh model dan nilai aktual (ground truth). Metrik ini memberikan informasi tentang seberapa jauh prediksi model dari nilai yang sebenarnya.
 
