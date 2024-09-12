@@ -80,49 +80,6 @@ Model ini dibangun dengan menggunakan algoritma Cosine Similarity. Yaitu, sebuah
 
 Dengan cosine similarity, diketahui kesamaan antara satu anime dengan anime lainnya. Shape (18336, 18336) merupakan ukuran matriks similarity dari data yang kita miliki. Berdasarkan data yang ada, matriks di atas sebenarnya berukuran 18336 restoran x 18336 anime (masing-masing dalam sumbu X dan Y). Artinya, telah di-identifikasi tingkat kesamaan pada 18336 judul anime. Tapi tentu hal ini tidak bisa ditampilkan semuanya. Oleh karena itu, dipilih 10 anime pada baris vertikal dan 5 anime pada sumbu horizontal seperti pada contoh di atas. 
 
-Tahapan modeling dimulai dari perancangan model machine learning, yang terdiri dari layer sebagai berikut:
-
-- Sequential
-  - Input Layer
-    - Dense 1
-  - Hidden Layer 
-    - Dropout 1
-    - Dense 2
-    - Dropout 2
-    - Dense 3
-    - Dropout 3
-    - Dense 4
-  - Output Layer
-    - Dense 5
-
-Model dibangun dengan hyperparameter sebagai berikut:
-
-- Jumlah Neuron per Layer:
-  - Dense Layer 1: 128 neuron
-  - Dense Layer 2: 64 neuron
-  - Dense Layer 3: 32 neuron
-  - Dense Layer 4: 16 neuron
-  - Dense Layer 5: 1 neuron
-
-- Activation Function:
-  - ReLU (Rectified Linear Unit): Digunakan pada layer-layer Dense, kecuali layer output.
-
-- Dropout Rate:
-  - Dropout Layer 1: 0.2 (20%)
-  - Dropout Layer 2: 0.2 (20%)
-  - Dropout Layer 3: 0.2 (20%)
-  - Dropout digunakan untuk mengurangi overfitting dengan secara acak mematikan neuron selama pelatihan.
-
-- Optimizer: Adam (yaitu, algoritma optimisasi yang digunakan untuk memperbarui bobot model selama pelatihan. Adam mengadaptasi learning rate berdasarkan estimasi momen pertama dan kedua dari gradien).
-
-- Loss Function: Mean Squared Error (MSE) yang digunakan untuk menghitung seberapa jauh prediksi model dari nilai aktual.
-
-- Epochs: Jumlah Epoch: 375 epoch (Epoch mengacu pada jumlah iterasi model melalui seluruh dataset selama pelatihan).
-
-Setelah model terbuat, model tersebut kemudian dicompile dengan menggunakan *loss function* `mean_squared_error` dan *optimizer* `adam`.
-
-Dan setelah itu data dilatih dengan jumlah epoch sebanyak 375.
-
 ## Evaluation
 Dengan penggunaan metrik Mean Squared Error (MSE) pada model machine learning ini. Didapatkan hasil pelatihan sebagai berikut (yang ditampilkan dalam bentuk *line plot*):
 
