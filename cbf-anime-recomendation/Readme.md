@@ -44,21 +44,10 @@ Proyek ini menggunakan data katalog anime yang terdaftar antara tahun 1917 hingg
   - `img_url` sejumlah 180.
 - Nilai unik berdasarkan kolom `uid` hanya berjumlah 16.216. Itu artinya, terdapat 3.095 baris data yang duplikat.
 - Pada kolom `aired` terdapat nilai 'Not available' sejumlah 372 baris.
-  
 
-![Null Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/preview-null-data.png)
-
-Dan juga, dari data tersebut tidak ditemukan data yang duplikat
-
-![Duplicate Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/duplicate-data.png)
-
-**Rubrik/Kriteria Tambahan (Opsional)**:
-
-Selanjutnya data divisualisasikan dalam bentuk scatter plot, dengan x adalah `longitude` dan y adalah `latitude`. Dan dikelompokan berdasarkan `price`. Setelah itu dibandingkan secara *side by side* dengan peta map asli Seattle.
-![Scatter Plot And Real Map Seattle](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/seattle-scatter-map.png)
-Dari perbandingan antara Scatter Plot dan Map Asli Seattle ini, diketahui bahwa:
-
-**Kebanyakan rumah yang berada di tengah-tengah kota, memiliki harga yang relatif mahal**
+### Grafik Perbandingan
+![Pie Chart Unique Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/pie-chart-unique-data.png)
+![Pie Chart Not Available Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/pie-chart-not-available-data.png)
 
 ## Data Preparation
 Data dibersihkan dengan menghapus kolom yang tidak diperlukan, dan juga baris yang memiliki nilai null. Dan juga pengkonversian beberapa kolom menjadi sebuah kolom baru.
