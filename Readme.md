@@ -2,60 +2,49 @@
 
 ## Domain Proyek
 
-Pasar properti di Seattle, Amerika Serikat, memiliki harga yang tinggi, terutama di area yang dekat dengan pusat kota. Banyak faktor yang mempengaruhi harga rumah, seperti ukuran rumah, jumlah kamar tidur dan kamar mandi, kondisi rumah, serta lokasi strategis. Analisis harga properti menjadi penting bagi pembeli dan penjual untuk memahami nilai pasar yang tepat.
-
-Proyek ini bertujuan untuk memprediksi harga rumah di Seattle menggunakan algoritma machine learning. Data historis rumah di wilayah tersebut dianalisis dengan mempertimbangkan berbagai fitur, seperti ukuran rumah, jumlah lantai, pemandangan, serta jarak dari pusat kota. Untuk meningkatkan akurasi, fitur-fitur tersebut dinormalisasi menggunakan StandarScaler, dan kinerja model diukur menggunakan Mean Squared Error (MSE).
-
-Hasil awal menunjukkan bahwa salah satu faktor utama yang mempengaruhi harga rumah adalah jaraknya dari pusat kota, di mana rumah yang lebih dekat cenderung lebih mahal. Dengan model prediksi ini, diharapkan dapat memberikan wawasan yang lebih baik bagi para pelaku pasar properti di Seattle.
+Proyek ini ditujukan untuk merekomendasikan anime berdasarkan anime yang telah disukai atau ditonton oleh pengguna. Proyek ini menggunakan pendekatan Content-based Filtering untuk menganalisis fitur-fitur dari anime (seperti sinopsis, genre, jumlah member yang mengikuti, popularitas, dan score) dan merekomendasikan anime yang serupa dari katalog.
 
 ## Business Understanding
-Dalam memprediksi harga rumah di Seattle, beberapa tantangan utama perlu diidentifikasi dan dijelaskan untuk memperjelas masalah yang dihadapi.
+Dalam merekomendasikan anime yang sesuai dengan selera penonton sangatlah sulit, karena ada banyak faktor yang perlu diperhatikan untuk memberikan rekomendasi yang terbaik.
 
 ### Problem Statements
-
-Menjelaskan pernyataan masalah latar belakang:
-- Harga rumah yang bervariasi di Seattle tergantung pada banyak faktor, namun sulit memahami faktor yang paling berpengaruh.
-- Sulitnya menemukan prediksi harga yang tepat untuk rumah yang berada di Seattle.
+Penggemar anime sering kesulitan menemukan anime baru yang sesuai dengan selera mereka. Sistem rekomendasi ini akan membantu pengguna menemukan anime baru berdasarkan anime yang sudah mereka sukai.
 
 ### Goals
-
-Menjelaskan tujuan dari pernyataan masalah:
-- Mengidentifikasi faktor kunci yang memengaruhi harga rumah berdasarkan data historis.
-- Mengukur pengaruh jarak ke pusat kota secara kuantitatif dengan analisis machine learning untuk mengetahui dampaknya pada harga.
-
+Memberikan rekomendasi anime yang mirip dengan preferensi pengguna.
 
 **Rubrik/Kriteria Tambahan (Opsional)**:
 ### Solution statements
-- Membuat visualisasi penyebaran rumah menggunakan Scatter Plot untuk mengidentifikasi faktor jarak rumah ke pusat kota Seattle.
-- Menggunakan model Deep Learning Sequential dengan metrik evaluasi Mean Squared Error (MSE) untuk prediksi harga rumah.
+Menggunakan content-based filtering dengan mempertimbangkan atribut-atribut seperti genre, studio, dan sinopsis untuk memberikan rekomendasi anime yang mirip dengan preferensi pengguna.
 
 ## Data Understanding
-Proyek ini menggunakan data historis rumah yang terjual antara mei 2014 hingga mei 2015. Data ini bersumber dari kaggle dan dapat diunduh melalui link berikut: [kc_house_data](https://www.kaggle.com/datasets/shivachandel/kc-house-data/data).
+Proyek ini menggunakan data katalog anime yang terdaftar antara tahun 1917 hingga 2020. Data ini bersumber dari kaggle dan dapat diunduh melalui link berikut: [Anime Dataset with Reviews - MyAnimeList](https://www.kaggle.com/datasets/marlesson/myanimelist-dataset-animes-profiles-reviews).
 
-### Variabel-variabel pada kc_house_data adalah sebagai berikut:
-- id: Merupakan id dari baris data.
-- date: Merupakan tanggal terjualnya rumah.
-- price: Merupakan harga dari rumah yang terjual, digunakan sebagai label target yang ingin diprediksi.
-- bedrooms: Merupakan jumlah kamar tidur yang terdapat di rumah.
-- bathrooms: Merupakan jumlah kamar mandi di rumah, termasuk kamar mandi setengah.
-- sqft_living: Merupakan luas area hunian dalam kaki persegi, yaitu ruang yang dapat digunakan untuk aktivitas sehari-hari di rumah.
-- sqft_lot: Merupakan luas total lot atau tanah tempat rumah berdiri dalam kaki persegi.
-- floors: Merupakan jumlah lantai di rumah.
-- waterfront: Merupakan indikator apakah rumah berada di tepi laut (1 jika ya, 0 jika tidak).
-- view: Merupakan skor yang menunjukkan seberapa baik pemandangan dari rumah, dalam skala 0-4.
-- condition: Merupakan skor yang menggambarkan kondisi keseluruhan rumah, dalam skala 1-5.
-- grade: Merupakan skor yang menunjukkan kualitas bangunan dan desain rumah, dalam skala 1-13.
-- sqft_above: Merupakan luas area di atas tanah (tidak termasuk basement) dalam kaki persegi.
-- sqft_basement: Merupakan luas basement dalam kaki persegi.
-- yr_built: Merupakan tahun rumah dibangun.
-- yr_renovated: Merupakan tahun terakhir rumah direnovasi. Jika rumah tidak pernah direnovasi, maka nilainya 0.
-- zipcode: Merupakan kode pos area rumah.
-- lat: Merupakan latitude dari koordinat rumah.
-- long: Merupakan longitude dari koordinat rumah.
-- sqft_living15: Merupakan luas area hunian dalam kaki persegi pada 15 rumah terdekat.
-- sqft_lot15: Merupakan luas lot (tanah) dalam kaki persegi pada 15 rumah terdekat.
+### Variabel-variabel pada Anime Dataset with Reviews - MyAnimeLis adalah sebagai berikut:
+- uid: Merupakan unik id dari anime.
+- title: Merupakan judul dari anime.
+- synopsis: Merupakan sinopsis atau gambaran singkat mengenai alur dari anime.
+- synopsis: Merupakan genre dari anime.
+- aired: Merupakan tahun atau tanggal tayang dari anime.
+- episodes: Merupakan jumlah episode dari anime.
+- members: Merupakan banyaknya pengguna website MyAnimeList yang mengikuti anime tersebut.
+- popularity: Merupakan urutan popularitas dari anime pada website MyAnimeList.
+- ranked: Merupakan ranking dari anime pada website MyAnimeList.
+- score: Merupakan skor dari anime pada website MyAnimeList, dalam skala 0-10.
+- img_url: Merupakan URL gambar dari anime pada website MyAnimeList.
+- link: Merupakan URL dari anime pada website MyAnimeList.
 
-Dari data tersebut diketahui terdapat 2 baris data yang null pada kolom `sqft_above`
+### Dari data tersebut diketahui bahwa:
+- Total dari data berjumlah 19.311 baris dan 12 kolom.
+- Terdapat nilai null pada kolom berikut.
+  - `synopsis` sejumlah 975.
+  - `episodes` sejumlah 706.
+  - `ranked` sejumlah 3212.
+  - `score` sejumlah 579.
+  - `img_url` sejumlah 180.
+- Nilai unik berdasarkan kolom `uid` hanya berjumlah 16.216. Itu artinya, terdapat 3.095 baris data yang duplikat.
+- Pada kolom `aired` terdapat nilai 'Not available' sejumlah 372 baris.
+  
 
 ![Null Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/preview-null-data.png)
 
