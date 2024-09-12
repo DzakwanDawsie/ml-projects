@@ -46,6 +46,7 @@ Proyek ini menggunakan data katalog anime yang terdaftar antara tahun 1917 hingg
 - Pada kolom `aired` terdapat nilai 'Not available' sejumlah 372 baris.
 
 ### Grafik Perbandingan
+![Bar Chart Null Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/bar-chart-null-data.png)
 ![Pie Chart Unique Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/pie-chart-unique-data.png)
 ![Pie Chart Not Available Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/pie-chart-na-data.png)
 
