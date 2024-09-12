@@ -47,7 +47,7 @@ Proyek ini menggunakan data katalog anime yang terdaftar antara tahun 1917 hingg
 
 ### Grafik Perbandingan
 ![Pie Chart Unique Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/pie-chart-unique-data.png)
-![Pie Chart Not Available Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/pie-chart-not-available-data.png)
+![Pie Chart Not Available Data](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/pie-chart-na-data.png)
 
 ## Data Preparation
 Data dibersihkan dengan menghapus kolom yang tidak diperlukan, dan juga baris yang memiliki nilai null. Dan juga pengkonversian beberapa kolom menjadi sebuah kolom baru.
