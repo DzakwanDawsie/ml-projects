@@ -1,4 +1,4 @@
-# Laporan Proyek Machine Learning - Dzakwan Dawsie
+![image](https://github.com/user-attachments/assets/39bdafaa-320a-405d-b6ca-68cce87ddcfb)# Laporan Proyek Machine Learning - Dzakwan Dawsie
 
 ## Domain Proyek
 
@@ -73,10 +73,19 @@ Data preparation dimulai dari melakukan cleansing data, hingga melakukan Feature
 14. Melakukan feature encoding menggunakan TF-ID.
 15. Menggabungkan `feature` hasil encoding dengan DataFrame `anime_df` tanpa kolom `title` dan `synopsis_clean`.
 
-## Modeling
+## Modeling & Result
 Model ini dibangun dengan menggunakan algoritma Cosine Similarity. Yaitu, sebuah algoritma yang mengukur kesamaan antara dua vektor dan menentukan apakah kedua vektor tersebut menunjuk ke arah yang sama. Ia menghitung sudut cosinus antara dua vektor. Semakin kecil sudut cosinus, semakin besar nilai cosine similarity. 
 
-![Cosine Similarity](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/cosine-sim-df.png)
+![Illustration](https://dicoding-web-img.sgp1.cdn.digitaloceanspaces.com/original/academy/dos:87157b70a8c08f2bb7b464f190fef8fa20210910171725.jpeg)
+
+Metrik ini sering digunakan untuk mengukur kesamaan dokumen dalam analisis teks. Sebagai contoh, dalam studi kasus ini, cosine similarity digunakan untuk mengukur kesamaan nama restoran dan nama masakan.
+
+Cosine similarity dirumuskan sebagai berikut.
+
+![Formula](https://dicoding-web-img.sgp1.cdn.digitaloceanspaces.com/original/academy/dos:784efd3d2ba47d47153b050526150ba920210910171725.jpeg)
+
+Hasil prediksi:
+
 
 Dengan cosine similarity, diketahui kesamaan antara satu anime dengan anime lainnya. Shape (18336, 18336) merupakan ukuran matriks similarity dari data yang kita miliki. Berdasarkan data yang ada, matriks di atas sebenarnya berukuran 18336 restoran x 18336 anime (masing-masing dalam sumbu X dan Y). Artinya, telah di-identifikasi tingkat kesamaan pada 18336 judul anime. Tapi tentu hal ini tidak bisa ditampilkan semuanya. Oleh karena itu, dipilih 10 anime pada baris vertikal dan 5 anime pada sumbu horizontal seperti pada contoh di atas. 
 
