@@ -1,6 +1,10 @@
 # Laporan Proyek Machine Learning - Dzakwan Dawsie
 
-## Domain Proyek
+## Project Overview
+
+Dalam era digital yang semakin berkembang, jumlah konten multimedia seperti anime terus meningkat dengan pesat. Platform streaming seperti Crunchyroll, Netflix, dan katalog anime MyAnimeList memiliki ribuan judul anime dari berbagai genre. Namun, dengan banyaknya pilihan, pengguna sering kali kesulitan untuk menemukan anime baru yang sesuai dengan preferensi mereka.
+
+Masalah ini menciptakan kebutuhan akan sistem rekomendasi yang cerdas, yang mampu membantu pengguna dalam menemukan anime baru berdasarkan anime yang sudah mereka tonton atau sukai. Sistem rekomendasi menjadi semakin penting karena dapat meningkatkan pengalaman pengguna, mengurangi waktu pencarian, serta mempromosikan anime yang mungkin tidak diketahui sebelumnya.
 
 Proyek ini ditujukan untuk merekomendasikan anime berdasarkan anime yang telah disukai atau ditonton oleh pengguna. Proyek ini menggunakan pendekatan Content-based Filtering untuk menganalisis fitur-fitur dari anime (seperti sinopsis, genre, jumlah member yang mengikuti, popularitas, dan score) dan merekomendasikan anime yang serupa dari katalog.
 
@@ -73,33 +77,37 @@ Data preparation dimulai dari melakukan cleansing data, hingga melakukan Feature
 14. Melakukan feature encoding menggunakan TF-ID.
 15. Menggabungkan `feature` hasil encoding dengan DataFrame `anime_df` tanpa kolom `title` dan `synopsis_clean`.
 
-## Modeling
+## Modeling & Result
 Model ini dibangun dengan menggunakan algoritma Cosine Similarity. Yaitu, sebuah algoritma yang mengukur kesamaan antara dua vektor dan menentukan apakah kedua vektor tersebut menunjuk ke arah yang sama. Ia menghitung sudut cosinus antara dua vektor. Semakin kecil sudut cosinus, semakin besar nilai cosine similarity. 
 
-![Cosine Similarity](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/cosine-sim-df.png)
+![Illustration](https://dicoding-web-img.sgp1.cdn.digitaloceanspaces.com/original/academy/dos:87157b70a8c08f2bb7b464f190fef8fa20210910171725.jpeg)
 
-Dengan cosine similarity, diketahui kesamaan antara satu anime dengan anime lainnya. Shape (18336, 18336) merupakan ukuran matriks similarity dari data yang kita miliki. Berdasarkan data yang ada, matriks di atas sebenarnya berukuran 18336 restoran x 18336 anime (masing-masing dalam sumbu X dan Y). Artinya, telah di-identifikasi tingkat kesamaan pada 18336 judul anime. Tapi tentu hal ini tidak bisa ditampilkan semuanya. Oleh karena itu, dipilih 10 anime pada baris vertikal dan 5 anime pada sumbu horizontal seperti pada contoh di atas. 
+Metrik ini sering digunakan untuk mengukur kesamaan dokumen dalam analisis teks. Sebagai contoh, dalam studi kasus ini, cosine similarity digunakan untuk mengukur kesamaan nama restoran dan nama masakan.
+
+Cosine similarity dirumuskan sebagai berikut.
+
+![Formula](https://dicoding-web-img.sgp1.cdn.digitaloceanspaces.com/original/academy/dos:784efd3d2ba47d47153b050526150ba920210910171725.jpeg)
+
+Hasil:
+
+![Predict Result](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/predict-result.png)
 
 ## Evaluation
-Dengan penggunaan metrik Mean Squared Error (MSE) pada model machine learning ini. Didapatkan hasil pelatihan sebagai berikut (yang ditampilkan dalam bentuk *line plot*):
+Dengan cosine similarity, diketahui kesamaan antara satu anime dengan anime lainnya. Shape (18336, 18336) merupakan ukuran matriks similarity dari data yang kita miliki. Berdasarkan data yang ada, matriks di atas sebenarnya berukuran 18336 restoran x 18336 anime (masing-masing dalam sumbu X dan Y). Artinya, telah di-identifikasi tingkat kesamaan pada 18336 judul anime. Tapi tentu hal ini tidak bisa ditampilkan semuanya. Oleh karena itu, dipilih 10 anime pada baris vertikal dan 5 anime pada sumbu horizontal seperti pada contoh di bawah. 
 
-![Training Result](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/train-result.png)
+![Evaluation](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/cosine-sim-df.png)
 
-Pelatihan dimulai dengan nilai dari `loss` dan `val_loss` adalah: loss: 23867654144.0000 - val_loss: 21040510976.0000
+Tabel cosine similarity menunjukkan tingkat kemiripan antar anime berdasarkan fitur-fitur yang diekstrak.
+Nilai dalam tabel berkisar antara 0 hingga 1, di mana:
+- Nilai 1 menunjukkan bahwa dua anime tersebut sangat mirip.
+- Nilai 0 menunjukkan bahwa dua anime tersebut tidak memiliki kemiripan.
 
-Dan diakhiri dengan nilai dari `loss` dan `val_loss` adalah: loss: 22257076224.0000 - val_loss: 21322461184.0000
+Tabel ini digunakan untuk merekomendasikan anime yang mirip dengan anime yang disukai pengguna. 
+Misalnya, jika pengguna menyukai anime "Yaruki Manman", maka sistem akan merekomendasikan anime yang memiliki nilai cosine similarity yang mendekati nilai 1, misalnya "Seikoujo: Haitoku no Biden Dorei" dengan kemiripan 96% atau "Lalala Lala-chan" dengan kemiripan 90%
 
-Hasil ini menunjukkan bahwa selama pelatihan, model mengalami penurunan dalam nilai `loss`, yang menunjukkan bahwa model belajar untuk memprediksi dengan lebih baik. Namun, ada sedikit peningkatan pada `val_loss` pada akhir pelatihan, yang mungkin mengindikasikan sedikit overfitting.
-
-Selanjutnya, model diuji dengan memasukan sampel data yaitu data baris pertama pada dataset. Dan didapatkan hasil sebagai berikut:
-![Predict Result](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/mse-house-price-prediction/first-row-prediction.png)
-
-Hasil ini menunjukkan bahwa di antara nilai prediksi dan nilai aktual, terdapat *gap* atau jarak yang diukur dalam nilai MSE.
+Dengan kata lain, tabel ini membantu dalam menemukan anime yang memiliki karakteristik serupa, genre yang sama, atau plot yang mirip dengan anime yang sudah ditonton.
 
 #### Kesimpulan
-Dari proyek machine learning ini didapati hasil akhir bahwa:
-- Berdasarkan analisis data dan model machine learning, faktor yang paling berpengaruh dalam kenaikan harga rumah di Seattle adalah **dekatnya jarak dari rumah menuju ke pusat kota**.
-- Meskipun sulit untuk menemukan prediksi harga rumah yang tepat, hasil dari model machine learning ini dapat memberikan estimasi harga yang lebih akurat dibandingkan metode tradisional. Metrik MSE digunakan untuk mengevaluasi kinerja model dan memberikan wawasan tentang akurasi prediksi model.
-- Solusi ini berdampak signifikan karena memungkinkan pengambilan keputusan yang lebih baik dalam hal harga jual atau beli rumah, perencanaan investasi, dan strategi pasar. Dengan estimasi harga yang lebih akurat dari model machine learning, pengguna dapat membuat keputusan yang lebih terinformasi dan strategis.
+Meskipun sulit untuk menemukan kemiripan yang benar-benar tepat, hasil dari penggunaan cosine similarity dapat memberikan rekomendasi yang akurat dengan mempertimbangkan beberapa variabel, seperti sinopsis dan genre yang menjadi bobot penilaian terbanyak. Solusi ini berdampak signifikan karena memungkinkan para penggemar anime mendapatkan rekomendasi yang lebih baik berdasarkan anime yang mereka sukai, tanpa perlu bersusah payah membandingkan banyak anime secara manual.
 
 **---Ini adalah bagian akhir laporan---**
