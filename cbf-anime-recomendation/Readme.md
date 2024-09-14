@@ -118,7 +118,13 @@ Rumus precision adalah:
 
 Pada kasus ini
 ![Hasil Precision](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/hasil-metric.png)
+![Hitungan Precision](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/hitungan-metric.png)
 
+TP = 9
+
+FP = 10
+
+Sehingga nilai precision nya adalah 0.47
 
 #### Kesimpulan
 Meskipun sulit untuk menemukan kemiripan yang benar-benar tepat, hasil dari penggunaan cosine similarity dapat memberikan rekomendasi yang akurat dengan mempertimbangkan beberapa variabel, seperti sinopsis dan genre yang menjadi bobot penilaian terbanyak. Solusi ini berdampak signifikan karena memungkinkan para penggemar anime mendapatkan rekomendasi yang lebih baik berdasarkan anime yang mereka sukai, tanpa perlu bersusah payah membandingkan banyak anime secara manual.
