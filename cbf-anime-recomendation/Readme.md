@@ -116,6 +116,7 @@ Rumus precision adalah:
 
 ![Rumus Precision](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/rumus-precision.png)
 
+Pada kasus ini
 ![Hasil Precision](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/hasil-metric.png)
 
 
