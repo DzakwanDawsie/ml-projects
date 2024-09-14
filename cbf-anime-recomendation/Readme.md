@@ -72,10 +72,12 @@ Data preparation dimulai dari melakukan cleansing data, hingga melakukan Feature
 9. Menghapus kolom `img_url` dan `link` dan `aired` karena tidak diperlukan.
 10. Mentransformasikan nilai pada kolom `genre` menjadi kolom tersendiri.
 11. Hapus kolom `genre` setelah transformasi.
-12. Melakukan beberapa teknik preprocessing text terhadap kolom `synopsis` dan membuatkannya kolom baru, yaitu `synopsis_clean`. Seperti teknik cleaning text, casefolding text, tokenizing text, dan juga filtering text. Kemudian merubahnya kembali ke bentuk kalimat.
-13. Hapus kolom `synopsis` setelah preprocessing text.
-14. Melakukan feature encoding menggunakan TF-ID.
-15. Menggabungkan `feature` hasil encoding dengan DataFrame `anime_df` tanpa kolom `title` dan `synopsis_clean`.
+12. Menghapus data yang memiliki `synopsis` selain huruf alphabet.
+14. Melakukan beberapa teknik preprocessing text terhadap kolom `synopsis` dan membuatkannya kolom baru, yaitu `synopsis_clean`. Seperti teknik cleaning text, casefolding text, tokenizing text, dan juga filtering text. Kemudian merubahnya kembali ke bentuk kalimat.
+15. Hapus kolom `synopsis` setelah preprocessing text.
+16. Melakukan feature encoding menggunakan TF-ID.
+17. Menghapus `feature` jika hanya dimiliki oleh 1 baris data.
+18. Menggabungkan `feature` hasil encoding dengan DataFrame `anime_df` tanpa kolom `title` dan `synopsis_clean`.
 
 ## Modeling & Result
 Model ini dibangun dengan menggunakan algoritma Cosine Similarity. Yaitu, sebuah algoritma yang mengukur kesamaan antara dua vektor dan menentukan apakah kedua vektor tersebut menunjuk ke arah yang sama. Ia menghitung sudut cosinus antara dua vektor. Semakin kecil sudut cosinus, semakin besar nilai cosine similarity. 
