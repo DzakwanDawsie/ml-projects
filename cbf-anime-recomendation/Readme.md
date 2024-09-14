@@ -97,7 +97,7 @@ Hasil:
 ## Evaluation
 Dengan cosine similarity, diketahui kesamaan antara satu anime dengan anime lainnya. Shape (18336, 18336) merupakan ukuran matriks similarity dari data yang kita miliki. Berdasarkan data yang ada, matriks di atas sebenarnya berukuran 18336 restoran x 18336 anime (masing-masing dalam sumbu X dan Y). Artinya, telah di-identifikasi tingkat kesamaan pada 18336 judul anime. Tapi tentu hal ini tidak bisa ditampilkan semuanya. Oleh karena itu, dipilih 10 anime pada baris vertikal dan 5 anime pada sumbu horizontal seperti pada contoh di bawah. 
 
-![Evaluation](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/cosine-sim-df.png)
+![Evaluation](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/cosine-sim-df-new.png)
 
 Tabel cosine similarity menunjukkan tingkat kemiripan antar anime berdasarkan fitur-fitur yang diekstrak.
 Nilai dalam tabel berkisar antara 0 hingga 1, di mana:
@@ -105,9 +105,22 @@ Nilai dalam tabel berkisar antara 0 hingga 1, di mana:
 - Nilai 0 menunjukkan bahwa dua anime tersebut tidak memiliki kemiripan.
 
 Tabel ini digunakan untuk merekomendasikan anime yang mirip dengan anime yang disukai pengguna. 
-Misalnya, jika pengguna menyukai anime "Yaruki Manman", maka sistem akan merekomendasikan anime yang memiliki nilai cosine similarity yang mendekati nilai 1, misalnya "Seikoujo: Haitoku no Biden Dorei" dengan kemiripan 96% atau "Lalala Lala-chan" dengan kemiripan 90%
+Misalnya, jika pengguna menyukai anime "Gunslinger Stratos The Animation: Bunki/Futatsu no Mirai", maka sistem akan merekomendasikan anime yang memiliki nilai cosine similarity yang mendekati nilai 1, misalnya "Sakana no Kuni" dengan kemiripan 86% atau "Shinya! Tensai Bakabon" dengan kemiripan 99%
 
 Dengan kata lain, tabel ini membantu dalam menemukan anime yang memiliki karakteristik serupa, genre yang sama, atau plot yang mirip dengan anime yang sudah ditonton.
+
+#### Metrik Evaluasi
+Metrik `precision` digunakan untuk mengukur seberapa tepat sebuah model dalam membuat prediksi positif. Dalam konteks klasifikasi biner, precision menghitung proporsi prediksi positif yang benar dari semua prediksi positif yang dihasilkan oleh model.
+
+Rumus precision adalah:
+
+`Precision = TP / (TP + FP)`
+
+di mana:
+- TP = True Positives
+- FP = False Positives
+
+
 
 #### Kesimpulan
 Meskipun sulit untuk menemukan kemiripan yang benar-benar tepat, hasil dari penggunaan cosine similarity dapat memberikan rekomendasi yang akurat dengan mempertimbangkan beberapa variabel, seperti sinopsis dan genre yang menjadi bobot penilaian terbanyak. Solusi ini berdampak signifikan karena memungkinkan para penggemar anime mendapatkan rekomendasi yang lebih baik berdasarkan anime yang mereka sukai, tanpa perlu bersusah payah membandingkan banyak anime secara manual.
