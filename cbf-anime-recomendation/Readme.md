@@ -114,11 +114,8 @@ Metrik `precision` digunakan untuk mengukur seberapa tepat sebuah model dalam me
 
 Rumus precision adalah:
 
-`Precision = TP / (TP + FP)`
+![Rumus Precision](https://raw.githubusercontent.com/DzakwanDawsie/ml-projects/main/cbf-anime-recomendation/rumus-precision.png)
 
-di mana:
-- TP = True Positives
-- FP = False Positives
 
 
 
